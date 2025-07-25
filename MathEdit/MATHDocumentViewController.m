@@ -48,6 +48,7 @@ NSString *MATHDocumentViewControllerUnsolvedPasteboardType = @"com.saturdayapps.
   XPParameterRaise(textView);
   XPParameterRaise(scrollView);
   XPParameterRaise(modelController);
+  XPLogAssrt([NSThread isMainThread], @"Not Main Thread");
   
   // TextContainer
   [textContainer setWidthTracksTextView:YES];
@@ -76,6 +77,14 @@ NSString *MATHDocumentViewControllerUnsolvedPasteboardType = @"com.saturdayapps.
   [textView XP_setContinuousSpellCheckingEnabled:YES];
   [textView XP_setGrammarCheckingEnabled:NO];
   [textView XP_setAutomaticSpellingCorrectionEnabled:YES];
+  [textView setAutomaticLinkDetectionEnabled:YES];
+  [textView setAutomaticDataDetectionEnabled:YES];
+  
+#ifdef AFF_NSRegularExpressionNone
+  [textView XP_setAutomaticQuoteSubstitutionEnabled:NO];
+  [textView XP_setAutomaticDashSubstitutionEnabled:NO];
+  [textView XP_setAutomaticTextReplacementEnabled:NO];
+#endif
   
   // ModelController
   [[modelController model] addLayoutManager:layoutManager];
@@ -88,6 +97,7 @@ NSString *MATHDocumentViewControllerUnsolvedPasteboardType = @"com.saturdayapps.
   // Self
   _textView = textView;
   [self setView:scrollView];
+  [textView XP_checkTextInDocument:self];
   
   // Theming
   [self __themeDidChangeNotification:nil];
