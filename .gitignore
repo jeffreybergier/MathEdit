@@ -2,6 +2,7 @@
 .places*
 *.app
 *.o
+**/obj
 Soulver.debug
 /Soulver/Soulver.pbproj/me.pbxuser
 xcuserdata

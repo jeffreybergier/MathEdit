@@ -125,6 +125,7 @@
 
 // MARK: Don't Disable These Platform Features
 
+#if !GNUSTEP
 #if defined(__m68k__) || defined(__ppc__) || defined (MAC_OS_X_VERSION_10_12)
 #undef TMP_AFF_TEST_NSAttributedStringIsEqualBroken
 #endif
@@ -221,6 +222,12 @@
 #if __MAC_OS_X_VERSION_MAX_ALLOWED >= 260000
 #define AFF_UIStyleAquaNone
 #endif
+
+#else // GNUSTEP
+
+#undef AFF_C_isnan_isinf_None
+
+#endif // GNUSTEP
 
 // MARK: AFF_Basic Types
 
